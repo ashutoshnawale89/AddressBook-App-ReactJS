@@ -5,6 +5,7 @@ import HeaderPage from './formcomponents/HeaderPage';
 function Page () {
     return (
         <div>
+            
             <body>
                 <HeaderPage/>
                 <Formpage/>

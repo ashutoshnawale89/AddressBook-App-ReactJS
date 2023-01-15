@@ -1,6 +1,7 @@
 import React from "react";
 import Form from './components/Page'
 import './components/formcomponents/FormComponent.css';
+import {Link , Route, Router} from "react-router-dom"
 
 
 class App extends React.Component {
@@ -8,7 +9,6 @@ class App extends React.Component {
   return (
     <div >
       <Form/>
-      
     </div>
   );
 }

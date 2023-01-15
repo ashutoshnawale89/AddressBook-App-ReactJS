@@ -1,7 +1,7 @@
 import './FormComponent.css';
 import React, { useState, useEffect } from "react";
 import logo1 from './sign.png';
-
+import AddressBookService from '../service/AddressBookService';
 
 
 const FormPage = () => {
@@ -10,12 +10,12 @@ const FormPage = () => {
     address: "",
     state: "",
     city: "",
-    pinCode: "",
+    pincode: "",
     phoneNumber: "",
-    emailId: "",
+    email: "",
     gender: "",
     notes: "",
-    id: "",
+    address_id: "",
   };
 
   const [formValue, setForm] = useState(initialValue);
@@ -39,20 +39,30 @@ const FormPage = () => {
       address: formValue.address,
     state: formValue.state,
     city: formValue.city,
-    pinCode: formValue.pinCode,
+    pincode: formValue.pincode,
     phoneNumber: formValue.phoneNumber,
-    emailId: formValue.emailId,
+    email: formValue.email,
     gender: formValue.gender,
     notes: formValue.notes,
     };
-
     console.log(object);
+    AddressBookService.addPerson(object)
+      .then((respone) => {
+        alert("Person Data Added Successfully");
+        console.log(respone.data.data);
+      })
+      .catch((error) => {
+        alert("Something went wrong", error);
+      });
+    // clear Data In The Form after submit andd save.....
+    // reset();
   };
+
 
   const reset = () => {
     setForm({
       ...initialValue,
-      id: formValue.id,
+      addressid: formValue.addressid,
       isUpdate: formValue.isUpdate,
     });
   };
@@ -87,8 +97,8 @@ const FormPage = () => {
             </div>
 
             <div className="row-content">
-              <label className="label text" htmlFor="pinCode">Pin-Code</label>
-              <input className="input" type="text" name="pinCode" id="pinCode" placeholder="Your PinCode.." required  value={formValue.pinCode} onChange={changeValue}/>
+              <label className="label text" htmlFor="pincode">Pin-Code</label>
+              <input className="input" type="text" name="pincode" id="pincode" placeholder="Your PinCode.." required  value={formValue.pincode} onChange={changeValue}/>
             </div>
 
             <div className="row-content">
@@ -97,8 +107,8 @@ const FormPage = () => {
             </div>
 
             <div className="row-content">
-              <label className="label text" htmlFor="emailId">Email-ID</label>
-              <input className="input" type="text" name="emailId" id="emailId" placeholder="xyz@xyz.com.." required  value={formValue.emailId} onChange={changeValue}/>
+              <label className="label text" htmlFor="email">Email-ID</label>
+              <input className="input" type="text" name="email" id="email" placeholder="xyz@xyz.com.." required  value={formValue.email} onChange={changeValue}/>
             </div>
 
           <div className="row-content">
