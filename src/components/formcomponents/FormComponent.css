@@ -52,7 +52,7 @@ body{
     
  }
  .form{
-    width: 50%;
+    width: 70%;
     padding: 80px 80px;
     background-color: white 0% 0% no-repeat padding-box;
     box-shadow: 0px 3px 6px#00000029;
@@ -98,6 +98,8 @@ body{
     display: flex;
     flex-direction: row;
     margin-bottom: 20px;
+    margin-left: 15px;
+    margin-right: 15px;
     align-items: center;
     border: 0px solid green;
     padding-top: 10px;
@@ -163,13 +165,12 @@ body{
    border-radius: 5px;
    opacity: 1;
    width: 30%;
-
 }
 
 .resetButton{
    font-size: 26px;
    background: #ef4d4d 0% 0% no-repeat padding-box;
-   border: 1px solid #969696;
+   border: 1px solid #000000;
    border-radius: 5px;
    opacity: 1;
    width: 30%;

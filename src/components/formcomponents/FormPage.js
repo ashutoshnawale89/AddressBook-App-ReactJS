@@ -2,6 +2,7 @@ import './FormComponent.css';
 import React, { useState, useEffect } from "react";
 import logo1 from './sign.png';
 import AddressBookService from '../service/AddressBookService';
+import { Link } from 'react-router-dom';
 
 
 const FormPage = () => {
@@ -74,11 +75,11 @@ const FormPage = () => {
           <div className="main-content">
           <div className="header-content"> 
           <div className="book-detail-text">Address Book Add Data form</div>
-          <div className="img">
-                           <img src={logo1} alt=""/>
-                        </div> 
-                      </div> 
-                        <br/> <br/>
+          <Link to='/'>
+              <img src={logo1} alt="HomePage"/>
+          </Link> 
+          </div> 
+          <br/> <br/>
           
           <div className="row-content">
               <label className="label text" htmlFor="name">Name</label>

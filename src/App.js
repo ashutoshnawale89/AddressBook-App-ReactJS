@@ -1,18 +1,21 @@
 import React from "react";
-import Form from './components/Page'
+import Form from './components/Page';
+import HomePage from "./components/homeComponents/HomePage";
 import './components/formcomponents/FormComponent.css';
-import {Link , Route, Router} from "react-router-dom"
+ import {Link , Route, Routes} from "react-router-dom"
 
 
 class App extends React.Component {
   render(){
   return (
     <div >
-      <Form/>
+      <Routes>
+            <Route path='/' element={<HomePage/>}/>
+            <Route path='/form' element={<Form/>}/>
+            <Route path="/Employeeform/:id" element={<Form />}></Route>
+        </Routes>
     </div>
   );
 }
 }
-
-
 export default App;
