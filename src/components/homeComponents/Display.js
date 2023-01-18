@@ -17,8 +17,9 @@ const Display = (props) => {
             "Data once deleted cannot be restored!! Do you wish to continue ?"
             );
         if (answer === true){
-            PersonService.deleteEmployee(personId)
+            PersonService.deletePerson(personId)
             .then((data) => {
+                 console.log(data);
               alert("Person deleted successfully!!");
               window.location.reload();
               props.getAllPerson();
@@ -65,11 +66,11 @@ const Display = (props) => {
                         <td>{person.notes}</td>
                         <td>
                             <img className="removeimg"
-                            onClick={() => remove(person.personId)}
+                            onClick={() => remove(person.addressId)}
                             src={DeleteLogo}
                             alt="delete"/>
                             <img className="updateimg"
-                            onClick={() => update(person.personId)}
+                            onClick={() => update(person.addressId)}
                             src={CreateLogo}
                             alt="edit"/>
                         </td>

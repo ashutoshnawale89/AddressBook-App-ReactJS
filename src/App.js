@@ -12,7 +12,7 @@ class App extends React.Component {
       <Routes>
             <Route path='/' element={<HomePage/>}/>
             <Route path='/form' element={<Form/>}/>
-            <Route path="/Employeeform/:id" element={<Form />}></Route>
+            <Route path="/Personform/:id" element={<Form />}></Route>
         </Routes>
     </div>
   );

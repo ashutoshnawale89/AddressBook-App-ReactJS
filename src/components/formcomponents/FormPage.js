@@ -2,10 +2,10 @@ import './FormComponent.css';
 import React, { useState, useEffect } from "react";
 import logo1 from './sign.png';
 import AddressBookService from '../service/AddressBookService';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 
-const FormPage = () => {
+const FormPage = (props) => {
   let initialValue = {
     name: "",
     address: "",
@@ -17,9 +17,47 @@ const FormPage = () => {
     gender: "",
     notes: "",
     address_id: "",
+    isUpdate: false,
   };
 
   const [formValue, setForm] = useState(initialValue);
+  const params =useParams();
+
+  useEffect(() => {
+    if (params.id){
+      getDataById(params.id);
+    }
+  }, [params.id]);
+
+  const getDataById = (id) => {
+    AddressBookService.getPersonById(id)
+         .then((respone) => {
+          let object = respone.data.data;
+          setData(object);
+         })
+         .catch((err) => {
+          alert("err is" ,err);
+         })
+  };
+
+  const setData = (obj) => {
+    console.log(obj);
+
+    setForm ({
+      ...formValue,
+      ...obj,
+      address_id:obj.address_id,
+      address: obj.address,
+    state: obj.state,
+    city: obj.state,
+    pincode: obj.pincode,
+    phoneNumber: obj.phoneNumber,
+    email: obj.email,
+    gender: obj.gender,
+    notes: obj.notes,
+    isUpdate: true,
+    });
+  };
 
   const changeValue = (event) => {
     console.log(event.target);
@@ -30,7 +68,6 @@ const FormPage = () => {
   useEffect(() => {
     console.log("Useeffect()");
   }, []);
-
 
   const save = async (event) => {
     event.preventDefault();
@@ -46,7 +83,26 @@ const FormPage = () => {
     gender: formValue.gender,
     notes: formValue.notes,
     };
+
     console.log(object);
+
+    if (formValue.isUpdate) {
+      var answer = window.confirm(
+        "Data once modified cannot be restored!! Do you wish to continue?"
+      );
+      if (answer === true) {
+        AddressBookService.updatePerson(params.id, object)
+          .then((data) => {
+            console.log(data.data.data);
+            alert("Data updated successfully!");
+          })
+          .catch((error) => {
+            console.log("WARNING!! Error updating the data!", error);
+          });
+      } else {
+        window.location.reload();
+      }
+    } else {
     AddressBookService.addPerson(object)
       .then((respone) => {
         alert("Person Data Added Successfully");
@@ -58,6 +114,7 @@ const FormPage = () => {
     // clear Data In The Form after submit andd save.....
     // reset();
   };
+};
 
 
   const reset = () => {
@@ -183,4 +240,4 @@ const FormPage = () => {
 }
 
 
-export default FormPage
+export default FormPage;
